@@ -36,6 +36,11 @@ type PrivateKey struct {
 	rsaPrivateKey *rsa.PrivateKey
 }
 
+// Size returns the size of the private key in bits.
+func (k *PrivateKey) Size() int {
+	return k.rsaPrivateKey.Size() * 8
+}
+
 // Pem returns the PEM encoded private key.
 func (k *PrivateKey) Pem() string {
 	privKeyPem := string(pem.EncodeToMemory(

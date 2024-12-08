@@ -41,6 +41,11 @@ type PublicKey struct {
 	publicKey *rsa.PublicKey
 }
 
+// Size returns the size of the public key in bits.
+func (k *PublicKey) Size() int {
+	return k.publicKey.Size()
+}
+
 // Pem returns the PEM encoded public key.
 func (k *PublicKey) Pem() string {
 	publicKeyBytes, err := x509.MarshalPKIXPublicKey(k.publicKey)
@@ -49,7 +54,7 @@ func (k *PublicKey) Pem() string {
 	}
 	return string(pem.EncodeToMemory(
 		&pem.Block{
-			Type:  "PUBLIC KEY",
+			Type:  "RSA PUBLIC KEY",
 			Bytes: publicKeyBytes,
 		},
 	))
